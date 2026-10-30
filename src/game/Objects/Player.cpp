@@ -21647,7 +21647,7 @@ bool Player::IsSpellFitByClassAndRace(uint32 spell_id, uint32* pReqlevel /*= nul
         return true;
     }
 
-    return false;
+    return true;
 }
 
 bool Player::HasQuestForGO(int32 GOId) const
