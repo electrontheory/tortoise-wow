@@ -350,7 +350,7 @@ void WorldSession::HandleTrainerBuySpellOpcode(WorldPacket & recv_data)
     if (proto->Effect[0] == SPELL_EFFECT_LEARN_SPELL && proto->EffectTriggerSpell[0] != 0)
         learnId = proto->EffectTriggerSpell[0];
 
-    _player->learnSpell(learnId, false);
+    _player->LearnSpell(learnId, false);
     _player->ModifyMoney(-int32(nSpellCost));
     SendTrainingSuccess(guid, spellId);
 }
