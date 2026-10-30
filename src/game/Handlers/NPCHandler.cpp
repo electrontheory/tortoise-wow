@@ -346,26 +346,13 @@ void WorldSession::HandleTrainerBuySpellOpcode(WorldPacket & recv_data)
     _player->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_TALK);
     _player->RemoveSpellsCausingAura(SPELL_AURA_MOUNTED);
 
-    Spell *spell;
-    if (proto->SpellVisual == 222)
-        spell = new Spell(_player, proto, false);
-    else
-        spell = new Spell(unit, proto, false);
+    uint32 learnId = trainer_spell->spell;
+    if (proto->Effect[0] == SPELL_EFFECT_LEARN_SPELL && proto->EffectTriggerSpell[0] != 0)
+        learnId = proto->EffectTriggerSpell[0];
 
-    SpellCastTargets targets;
-    targets.setUnitTarget(_player);
-
-    SpellCastResult cast_result = spell->prepare(std::move(targets));
-    spell->update(1); // Update the spell right now. Prevents desynch => take twice the money if you click really fast.
-
-    // Only charge player if cast of learning spell was successful.
-    if (cast_result == SPELL_CAST_OK)
-    {
-        _player->ModifyMoney(-int32(nSpellCost));
-        SendTrainingSuccess(guid, spellId);
-    }
-    else
-        SendTrainingFailure(guid, spellId, TRAIN_FAIL_UNAVAILABLE);
+    _player->learnSpell(learnId, false);
+    _player->ModifyMoney(-int32(nSpellCost));
+    SendTrainingSuccess(guid, spellId);
 }
 
 void WorldSession::HandleGossipHelloOpcode(WorldPacket & recv_data)
