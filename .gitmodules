@@ -1,3 +1,6 @@
 [submodule "dep/Eluna"]
 	path = dep/Eluna
 	url = https://github.com/ElunaLuaEngine/Eluna.git
+[submodule "modules/TortoiseBots"]
+	path = modules/TortoiseBots
+	url = https://github.com/TortoiseBots/TortoiseBots.git
