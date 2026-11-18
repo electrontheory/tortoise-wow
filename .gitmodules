@@ -3,4 +3,4 @@
 	url = https://github.com/ElunaLuaEngine/Eluna.git
 [submodule "modules/TortoiseBots"]
 	path = modules/TortoiseBots
-	url = https://github.com/TortoiseBots/TortoiseBots.git
+	url = https://github.com/Sagiroth/TortoiseBots.git
